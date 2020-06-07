@@ -1,0 +1,25 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+     
+     <div class="content-section">
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{user.profile.image.url}}">
+        <div class="media-body">
+          <h2 class="account-heading"> {{user.username}} </h2><!--this user is inbuilt for django and stores info about the current logged in user-->
+          <p class="text-secondary"> {{user.email}} </p>
+         
+        </div>
+      </div>
+      <!-- FORM HERE -->
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}  
+        <fieldset class-"form-group"><!--this groups related elements in a form-->
+            <legend class="border-bottom mb-4">Profile Info</legend>
+            {{u_form | crispy}} 
+            {{p_form | crispy}}<!--this automatically calls for the form creation and printing-->
+        </fieldset>
+        <button class="btn btn-outline-info" type="submit">Update</button>
+      </form>
+    </div>
+   {% endblock content %}
